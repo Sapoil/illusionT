@@ -26,10 +26,9 @@ function draw() {
   rectMode(CENTER);
   rect(0, -150, baseLength, 40);
 
-  text("FLÈCHE HAUT pour diminuer la taille de la barre",-width/2,-height/2+15);
-  text("FLÈCHE BAS pour augmenter la taille de la barre",-width/2,-height/2+30);
-  text("ENTRER pour passer à l'angle suivant",-width/2,-height/2+45);
-  text("ÉCHAP pour télécharger lefichier de données",-width/2,-height/2+60);
+
+  text("FLÈCHE HAUT pour diminuer la taille de la barre\nFLÈCHE BAS pour augmenter la taille de la barre\nENTRER pour passer à l'angle suivant\nÉCHAP pour télécharger le fichier de données",-width/2,-height/2+15);
+  text("Les données sont relatives (différence entre la taille objectif et celle confirmée par le patient)\nOn récupère les données dans un fichier csv (exploitable par Excel)",-width/2,height/2-30);
   
   push();
   angleMode(DEGREES);
@@ -52,6 +51,7 @@ function keyPressed() {
     if (angle < 90) {
       data[index] += (300 - length).toString(10) + ";";
       angle += 5;
+      length = random(baseLength-50,baseLength+50);
     } else {
       data[index] += (300 - length).toString(10) + ";";
       writer.print(data[index]);
@@ -63,4 +63,8 @@ function keyPressed() {
   if(keyCode == ESCAPE){
     writer.close();
   }
+}
+
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight);
 }
